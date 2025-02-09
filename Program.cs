@@ -1,5 +1,6 @@
 ﻿class Program{
         static Dictionary<string, List<int>> students = new Dictionary<string, List<int>>();
+        static List<int> all_notes = new List<int>();
         static void take_student()
         {
                 List<string> listStudent = new List<string>();
@@ -43,6 +44,49 @@
                 }
         }
 
+        static void display_all_notes()
+        {
+               foreach (var student in students) {
+                        Console.WriteLine($"Elève: {student.Key} - Notes : {string.Join(", ", student.Value)}");
+               }
+        }
+
+        static void moyenne_etudiant()
+        {
+                string name = Console.ReadLine();
+                List<int> Notes = students[name];
+                int sum = 0;
+                int moyenne;
+
+                if (students.ContainsKey(name)) {
+                        foreach(int note in Notes) {
+                                sum += note;
+                        }
+                
+                        moyenne = sum / Notes.Count;
+                        Console.WriteLine($"Moyenne de {name} : {moyenne}");
+                } else {
+                        Console.WriteLine("L'étudiant n'existe pas !");
+                }
+                
+        }
+
+        static void display_moyenne_classe()
+        {
+                int TotalSum = 0;
+                int NoteCount = 0;
+                int moyenne;
+
+                foreach(var student in students) {
+                        TotalSum += student.Value.Sum();
+                        NoteCount += student.Value.Count;
+                }
+                if (NoteCount > 0) {
+                        moyenne = TotalSum / NoteCount;
+                        Console.WriteLine($"Moyenne de la classe : {moyenne}");
+                }
+        }
+
         static void Main() 
         {
                 int nb;
@@ -77,14 +121,17 @@
                                 break;
                         case 3:
                                 Console.WriteLine("--- Listes des étudiants et leurs notes ---");
+                                display_all_notes();
                                 Console.WriteLine(" ");
                                 break;
                         case 4:
-                                Console.WriteLine("Entrez le nom de l'étudiant :");
+                                Console.Write("Entrez le nom de l'étudiant :");
+                                moyenne_etudiant();
                                 Console.WriteLine(" ");
                                 break;
                         case 5:
                                 Console.WriteLine("--- Listes de la moeynne de la classe ---");
+                                display_moyenne_classe();
                                 Console.WriteLine(" ");
                                 break;
                         case 6:
