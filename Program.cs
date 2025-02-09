@@ -1,14 +1,18 @@
 ﻿class Program{
-
+        static Dictionary<string, List<int>> students = new Dictionary<string, List<int>>();
         static void take_student()
         {
                 List<string> listStudent = new List<string>();
                 List<int> Notes = new List<int>();
-
-                string input = Console.ReadLine();
-                listStudent.Add(input);
-
                 int nombre;
+                string name = Console.ReadLine();
+
+                if (students.ContainsKey(name)) {
+                        Console.WriteLine("L'étudiant est déjà enregistré !");
+                        return;
+                }
+
+                listStudent.Add(name);
 
                 while(Notes.Count < 3) {
                         Console.Write($"Ajouter une note :");
@@ -22,8 +26,21 @@
                                 }
                         }
                 }
+                students[name] = Notes;
                 Console.WriteLine($"Élève : {listStudent[0]}");
                 Console.WriteLine($"Notes : {string.Join(", ", Notes)}");
+        }
+
+        static void display_student_notes()
+        {
+                string name = Console.ReadLine();
+
+                if (students.ContainsKey(name)) {
+                        List<int> Notes = students[name];
+                        Console.WriteLine($"Notes : {string.Join(", ", Notes)}");
+                } else {
+                        Console.WriteLine("FAUX");
+                }
         }
 
         static void Main() 
@@ -54,7 +71,8 @@
                                 Console.WriteLine(" ");
                                 break;
                         case 2:
-                                Console.WriteLine("Entrez le nom de l'étudiant :");
+                                Console.Write("Entrez le nom de l'étudiant :");
+                                display_student_notes();
                                 Console.WriteLine(" ");
                                 break;
                         case 3:
