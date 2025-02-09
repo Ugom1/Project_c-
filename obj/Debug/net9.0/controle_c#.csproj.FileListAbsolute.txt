@@ -26,3 +26,4 @@
 /Users/ugo/Keyce/c#/controle_c#/Project_c-/obj/Debug/net9.0/controle_c#.pdb
 /Users/ugo/Keyce/c#/controle_c#/Project_c-/obj/Debug/net9.0/controle_c#.genruntimeconfig.cache
 /Users/ugo/Keyce/c#/controle_c#/Project_c-/obj/Debug/net9.0/ref/controle_c#.dll
+/Users/ugo/Keyce/c#/controle_c#/Project_c-/obj/Debug/net9.0/controle_c#.sourcelink.json
