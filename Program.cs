@@ -1,6 +1,5 @@
 ﻿class Program{
         static Dictionary<string, List<int>> students = new Dictionary<string, List<int>>();
-        static List<int> all_notes = new List<int>();
         static void take_student()
         {
                 List<string> listStudent = new List<string>();
