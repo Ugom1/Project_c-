@@ -62,7 +62,6 @@
                         foreach(int note in Notes) {
                                 sum += note;
                         }
-                
                         moyenne = sum / Notes.Count;
                         Console.WriteLine($"Moyenne de {name} : {moyenne}");
                 } else {
@@ -84,6 +83,55 @@
                 if (NoteCount > 0) {
                         moyenne = TotalSum / NoteCount;
                         Console.WriteLine($"Moyenne de la classe : {moyenne}");
+                }
+        }
+
+        static void display_best_moyenne()
+        {
+                int moyenne;
+                int meilleurMoyenne = 0;
+                string meilleurEtudiant = "";
+
+                foreach(var student in students) {
+                        moyenne = student.Value.Sum() / student.Value.Count;
+
+                        if (moyenne > meilleurMoyenne) {
+                                meilleurMoyenne = moyenne;
+                                meilleurEtudiant = student.Key;
+                        }
+                }
+                Console.WriteLine($"L'étudiant avec la meilleure moyenne est {meilleurEtudiant} avec une moyenne de {meilleurMoyenne}.");
+
+        }
+
+        static void display_worst_moyenne()
+        {
+                int moyenne;
+                int pireMoyenne = int.MaxValue;
+                string pireEtudiant = "";
+
+                foreach(var student in students) {
+                        moyenne = student.Value.Sum() / student.Value.Count;
+
+                        if (moyenne < pireMoyenne) {
+                                pireMoyenne = moyenne;
+                                pireEtudiant = student.Key;
+                        }
+                }
+                Console.WriteLine($"L'étudiant avec la meilleure moyenne est {pireEtudiant} avec une moyenne de {pireMoyenne}.");
+
+        }
+
+        static void display_basic_moyenne()
+        {
+                bool foundEtudiant = false;
+                int moyenne;
+
+                foreach(var student in students) {
+                        moyenne = student.Value.Sum() / student.Value.Count;
+                        if (moyenne >= 10) {
+                                Console.WriteLine($"L'étudiant avec la meilleure moyenne est {student.Key} avec une moyenne de {moyenne}.");
+                        }
                 }
         }
 
@@ -135,16 +183,22 @@
                                 Console.WriteLine(" ");
                                 break;
                         case 6:
-                                Console.WriteLine("--- Etudiant ayant la meilleure note ---");
+                                Console.WriteLine("--- Etudiant ayant la meilleure moyenne ---");
+                                display_best_moyenne();
                                 Console.WriteLine(" ");
                                 break;
                         case 7:
-                                Console.WriteLine("--- Etudiant ayant la pire note ---");
+                                Console.WriteLine("--- Etudiant ayant la pire moyenne ---");
+                                display_worst_moyenne();
                                 Console.WriteLine(" ");
                                 break;
                         case 8:
                                 Console.WriteLine("--- Listes des étudiants ayant une moyenne ≥ 10 ---");
+                                display_basic_moyenne();
                                 Console.WriteLine(" ");
+                                break;
+                        case 9:
+                                Console.WriteLine("Fin du programme.");
                                 break;
                         }
                 } while (nb != 9);
