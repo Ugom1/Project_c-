@@ -12,15 +12,27 @@
                         return;
                 }
 
+
+
                 listStudent.Add(name);
 
-                while(Notes.Count < 3) {
-                        Console.Write($"Ajouter une note :");
+                while(Notes.Count < 10) {
+                        Console.Write($"Ajouter une note (ou 'q' pour arrêter) :");
                         string insertNb = Console.ReadLine();
+
+                        if(insertNb.ToLower() == "q") {
+                                if(Notes.Count >= 1) {
+                                        break;
+                                } else {
+                                        Console.WriteLine("veuillez mettre au moins une note !");
+                                        continue;
+                                }
+                        }
 
                         if (int.TryParse(insertNb, out nombre)) {
                                 if (nombre > 0 && nombre <= 20) {
                                         Notes.Add(nombre);
+                                        Notes.Sort();
                                 } else {
                                         Console.WriteLine("La note doit être inférieur à 20 ou supérieur à 0");
                                 }
@@ -39,14 +51,14 @@
                         List<int> Notes = students[name];
                         Console.WriteLine($"Notes : {string.Join(", ", Notes)}");
                 } else {
-                        Console.WriteLine("FAUX");
+                        Console.WriteLine("L'étudiant n'existe pas !");
                 }
         }
 
         static void display_all_notes()
         {
                foreach (var student in students) {
-                        Console.WriteLine($"Elève: {student.Key} - Notes : {string.Join(", ", student.Value)}");
+                        Console.WriteLine($"{student.Key} : {string.Join(", ", student.Value)}");
                }
         }
 
@@ -62,7 +74,7 @@
                                 sum += note;
                         }
                         moyenne = sum / Notes.Count;
-                        Console.WriteLine($"Moyenne de {name} : {moyenne}");
+                        Console.WriteLine($"Moyenne de {name} : {moyenne:F2}");
                 } else {
                         Console.WriteLine("L'étudiant n'existe pas !");
                 }
@@ -117,7 +129,7 @@
                                 pireEtudiant = student.Key;
                         }
                 }
-                Console.WriteLine($"L'étudiant avec la meilleure moyenne est {pireEtudiant} avec une moyenne de {pireMoyenne}.");
+                Console.WriteLine($"L'étudiant avec la pire moyenne est {pireEtudiant} avec une moyenne de {pireMoyenne}.");
 
         }
 
@@ -128,7 +140,7 @@
                 foreach(var student in students) {
                         moyenne = student.Value.Sum() / student.Value.Count;
                         if (moyenne >= 10) {
-                                Console.WriteLine($"L'étudiant avec la meilleure moyenne est {student.Key} avec une moyenne de {moyenne}.");
+                                Console.WriteLine($"L'étudiant ayant la moyenne est {student.Key} avec une moyenne de {moyenne}.");
                         }
                 }
         }
@@ -136,6 +148,8 @@
         static void Main() 
         {
                 int nb;
+                bool isValid;
+                string input;
 
                 do {
                 Console.WriteLine("Bienvenue dans l'application de gestion des notes");
@@ -151,7 +165,12 @@
                 Console.WriteLine(" ");
                 Console.WriteLine(" ");
                 Console.Write("Entrez votre choix : ");
-                nb = int.Parse(Console.ReadLine());
+                input = Console.ReadLine();
+                isValid = int.TryParse(input, out nb);
+
+                if (!isValid) {
+                        Console.WriteLine("Veuillez rentrez un nombre valide ! \n");
+                }
 
                 switch(nb)
                 {
