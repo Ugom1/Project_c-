@@ -19,10 +19,10 @@
                         string insertNb = Console.ReadLine();
 
                         if (int.TryParse(insertNb, out nombre)) {
-                                if (nombre <= 20) {
+                                if (nombre > 0 && nombre <= 20) {
                                         Notes.Add(nombre);
                                 } else {
-                                        Console.WriteLine("La note doit être inférieur à 20");
+                                        Console.WriteLine("La note doit être inférieur à 20 ou supérieur à 0");
                                 }
                         }
                 }
@@ -123,7 +123,6 @@
 
         static void display_basic_moyenne()
         {
-                bool foundEtudiant = false;
                 int moyenne;
 
                 foreach(var student in students) {
